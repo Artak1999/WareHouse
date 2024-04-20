@@ -16,10 +16,15 @@ public class MaterialController {
     private MaterialServiceImpl materialServiceImpl;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public String materials(Model model){
         model.addAttribute("materials",materialServiceImpl.getAllMaterials());
         return "material";
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void add(@RequestBody Material material, @RequestBody int id){
+        materialServiceImpl.addMaterial(material,id);
     }
 
     @DeleteMapping("/{id}")

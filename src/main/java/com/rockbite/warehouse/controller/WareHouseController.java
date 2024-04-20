@@ -1,5 +1,6 @@
 package com.rockbite.warehouse.controller;
 
+import com.rockbite.warehouse.model.WareHouse;
 import com.rockbite.warehouse.service.impl.WareHouseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,12 @@ public class WareHouseController {
     public String warehouse(Model model){
         model.addAttribute("warehouse",wareHouseServiceImpl.getAll());
         return "warehouse";
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void add(@RequestBody WareHouse wareHouse){
+        wareHouseServiceImpl.addWareHouse(wareHouse);
     }
 
     @DeleteMapping("/{id}")
